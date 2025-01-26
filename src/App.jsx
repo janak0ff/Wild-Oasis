@@ -1,33 +1,35 @@
-import Styled from "styled-components"; // Import styled-components library
-import GlobalStyle from "./styles/GlobalStyle";
-import Button from "./ui/Button";
-import Input from "./ui/Input";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import GlobalStyles from "./styles/GlobalStyles";
+import Dashboard from "./pages/Dashboard";
+import Bookings from "./pages/Bookings";
+import Cabins from "./pages/Cabins";
+import Users from "./pages/Users";
+import Settings from "./pages/Settings";
+import Account from "./pages/Account";
+import Login from "./pages/Login";
+import PageNotFound from "./pages/PageNotFound";
 
-// Define a styled h1 element with red text color
-const H1 = Styled.h1`
-  color: red;
-`;
-
-// Define a styled div element to serve as the container for the app
-const StyledApp = Styled.div`
-  background-color: #925a5a;
-  padding: 20px;
-  text-align: center;
-`;
-
-// Define the main App component
 function App() {
   return (
     <>
-      <GlobalStyle />
-      <StyledApp>
-        <H1>Hello World!</H1>
-        <Button onClick={() => alert("click in")}>Click in</Button>
-        <Button onClick={() => alert("click out")}>Click out</Button>
-        <Input type="text" placeholder="Enter your name" />
-      </StyledApp>
+      <GlobalStyles />
+      <BrowserRouter>
+        <Routes>
+          {/* // Redirect to dashboard if no route is matched */}
+          <Route index element={<Navigate replace to="dashboard" />} />
+          {/* // Routes for the different pages */}
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="bookings" element={<Bookings />} />
+          <Route path="cabins" element={<Cabins />} />
+          <Route path="users" element={<Users />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="account" element={<Account />} />
+          <Route path="login" element={<Login />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
 
-export default App; // Export the App component as the default export
+export default App;
