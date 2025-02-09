@@ -18,3 +18,9 @@ npm i styled-components
 ```
 npm i react-router-dom@6
 ```
+
+### Installing React Icons
+
+```
+npm i react-icons
+```
