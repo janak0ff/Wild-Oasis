@@ -30,3 +30,15 @@ npm i react-icons
 ```
 npm install --save @supabase/supabase-js
 ```
+
+### Installing React Query or Tanstack Query
+
+```
+npm i @tanstack/react-query
+```
+
+### Installing React Query Devtools
+
+```
+npm install @tanstack/react-query-devtools
+```
