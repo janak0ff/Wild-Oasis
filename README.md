@@ -24,3 +24,9 @@ npm i react-router-dom@6
 ```
 npm i react-icons
 ```
+
+### Installing Supabase
+
+```
+npm install --save @supabase/supabase-js
+```
