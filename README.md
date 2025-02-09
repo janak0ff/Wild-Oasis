@@ -12,3 +12,9 @@ Currently, two official plugins are available:
 ```
 npm i styled-components
 ```
+
+### Installing react router v6
+
+```
+npm i react-router-dom@6
+```
