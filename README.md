@@ -42,3 +42,9 @@ npm i @tanstack/react-query
 ```
 npm install @tanstack/react-query-devtools
 ```
+
+### Installing date-fns for date and time manipulation
+
+```
+npm install date-fns
+```
