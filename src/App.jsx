@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { GlobalStyle } from "./styles/GlobalStyle";
 
 function App() {
   const H1 = styled.h1`
@@ -32,12 +33,15 @@ function App() {
   `;
 
   return (
-    <Container>
-      <H1>Hello World</H1>
-      <Button onClick={() => alert("clicked 1")}>Click 1</Button>
-      <Button onClick={() => alert("clicked 2")}>Click 2</Button>
-      <Input type="text" placeholder="Enter your name" />
-    </Container>
+    <>
+      <GlobalStyle />
+      <Container>
+        <H1>Hello World</H1>
+        <Button onClick={() => alert("clicked 1")}>Click 1</Button>
+        <Button onClick={() => alert("clicked 2")}>Click 2</Button>
+        <Input type="text" placeholder="Enter your name" />
+      </Container>
+    </>
   );
 }
 
