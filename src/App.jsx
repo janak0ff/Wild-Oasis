@@ -1,28 +1,12 @@
 import styled from "styled-components";
 import { GlobalStyle } from "./styles/GlobalStyle";
+import Input from "./ui/input";
+import Button from "./ui/Button";
 
 function App() {
   const H1 = styled.h1`
     color: red;
     font-size: 100px;
-  `;
-
-  const Button = styled.button`
-    background-color: red;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    margin: 10px;
-    padding: 10px 20px;
-  `;
-
-  const Input = styled.input`
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
   `;
 
   const Container = styled.main`
