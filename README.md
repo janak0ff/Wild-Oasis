@@ -54,3 +54,9 @@ npm install date-fns
 ```
 npm install react-hot-toast
 ```
+
+### Install React Hook Form
+
+```
+npm install react-hook-form
+```
