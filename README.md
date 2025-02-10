@@ -48,3 +48,9 @@ npm install @tanstack/react-query-devtools
 ```
 npm install date-fns
 ```
+
+### Install React Hot Toast
+
+```
+npm install react-hot-toast
+```
