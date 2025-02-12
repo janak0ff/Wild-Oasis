@@ -58,6 +58,8 @@ export async function createEditCabin(newCabin, id) {
       console.error(storageError);
       throw new Error("Cabin image could not be uploaded");
     }
+    // 4. Return the new cabin data
+    return data;
   }
 
   return data;
