@@ -49,8 +49,8 @@ const variations = {
 };
 
 const Button = styled.button`
-  border-radius: var(--border-radius-sm);
   border: none;
+  border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-sm);
 
   ${(props) => sizes[props.size]}
