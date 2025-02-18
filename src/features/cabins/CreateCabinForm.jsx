@@ -9,26 +9,39 @@ import FormRow from "../../ui/FormRow";
 import { useCreateCabin } from "./useCreateCabin";
 import { useEditCabin } from "./useEditCabin";
 
+/**
+ * CreateCabinForm component handles the creation and editing of cabin information.
+ *
+ * @param {Object} cabinToEdit - The cabin data to edit, defaults to an empty object for new cabins.
+ * @param {Function} onCloseModal - Function to close the modal, optional.
+ */
 function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   const { isCreating, createCabin } = useCreateCabin();
-
   const { isEditing, editCabin } = useEditCabin();
 
+  // Indicates if a cabin is currently being created or edited
   const isWorking = isCreating || isEditing;
 
+  // Extract existing cabin data for editing
   const { id: editId, ...editValues } = cabinToEdit;
   const isEditSession = Boolean(editId);
 
+  // Initialize form with default values if editing
   const { register, handleSubmit, reset, getValues, formState } = useForm({
     defaultValues: isEditSession ? editValues : {},
   });
 
   const { errors } = formState;
 
+  /**
+   * Form submission handler.
+   * @param {Object} data - The data submitted from the form.
+   */
   const onSubmit = (data) => {
     const image = typeof data.image === "string" ? data.image : data.image[0];
 
-    if (isEditSession)
+    if (isEditSession) {
+      // Edit existing cabin
       editCabin(
         { newCabinData: { ...data, image }, id: editId },
         {
@@ -38,9 +51,10 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           },
         }
       );
-    else
+    } else {
+      // Create new cabin
       createCabin(
-        { ...data, image: image },
+        { ...data, image },
         {
           onSuccess: () => {
             reset();
@@ -48,11 +62,15 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           },
         }
       );
-    // console.log(data);
+    }
   };
 
+  /**
+   * Form error handler.
+   * @param {Object} errors - The errors from the form validation.
+   */
   function onError(errors) {
-    // console.log(errors);
+    // Handle form errors here
   }
 
   return (
@@ -91,10 +109,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           disabled={isWorking}
           {...register("regularPrice", {
             required: "This field is required",
-            min: {
-              value: 1,
-              message: "Regular price must be greater than 0",
-            },
+            min: { value: 1, message: "Regular price must be greater than 0" },
           })}
         />
       </FormRow>
@@ -108,8 +123,8 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           {...register("discount", {
             required: "This field is required",
             validate: (value) => {
-              const discount = Number(value); // Convert to number
-              const regularPrice = Number(getValues("regularPrice")); // Convert to number
+              const discount = Number(value);
+              const regularPrice = Number(getValues("regularPrice"));
 
               return (
                 discount <= regularPrice ||
@@ -145,7 +160,6 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
       </FormRow>
 
       <FormRow>
-        {/* type is an HTML attribute! */}
         <Button
           variation="secondary"
           type="reset"
