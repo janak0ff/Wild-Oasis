@@ -1,7 +1,15 @@
-import { cloneElement, createContext, useContext, useState } from "react";
+import {
+  cloneElement,
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import styled from "styled-components";
 import { HiXMark } from "react-icons/hi2";
 import { createPortal } from "react-dom";
+import useOutsideClick from "../hooks/useOutsideClick";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -104,24 +112,18 @@ function Open({ children, opens: opensWindowName }) {
 }
 
 /**
- * Window component renders a modal window using React Portal.
- * It displays the children content only when the window name matches the openName from context.
+ * Window component renders a modal window with the given name when the openName context state matches the given name.
+ * It also renders an overlay with a close button in the top-right corner.
+ * The children element is cloned and the close function is passed as the onCloseModal prop.
  *
  * @param {Object} props - Component props
- * @param {ReactNode} props.children - The content to be displayed inside the modal
- * @param {string} props.name - The name of the modal window
- * @returns {ReactPortal|null} - Returns a portal with modal content or null if the window is not open
- *
- * The Window component is a controlled component that is connected to the ModalContext.
- * It will only render the modal content if the name prop matches the openName from context.
- * When the modal is open, the component will render a portal with the modal content.
- * When the modal is closed, the component will render null.
- *
- * The component also provides a close function as the onCloseModal prop to the children element.
- * This function can be used by the children element to close the modal window.
+ * @param {ReactNode} props.children - The children element to render inside the modal window
+ * @param {string} props.name - The name of the modal window to match with the openName context state
+ * @returns {ReactElement | null} - The rendered modal window or null if the name does not match the openName context state
  */
 function Window({ children, name }) {
   const { openName, close } = useContext(ModalContext);
+  const ref = useOutsideClick(close); // Close the modal when clicking outside the modal window
 
   // If the name of this window does not match the open window name, return null
   if (name !== openName) return null;
@@ -129,7 +131,7 @@ function Window({ children, name }) {
   // Render the modal using React Portal
   return createPortal(
     <Overlay>
-      <StyledModal>
+      <StyledModal ref={ref}>
         <Button onClick={close}>
           <HiXMark />
         </Button>
