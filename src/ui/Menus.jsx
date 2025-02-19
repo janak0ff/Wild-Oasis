@@ -119,7 +119,7 @@ function Toggle({ id }) {
   }
 
   return (
-    <StyledToggle onClick={handleClick} aria-label="Open menu">
+    <StyledToggle onClick={handleClick}>
       <HiEllipsisVertical />
     </StyledToggle>
   );
@@ -135,12 +135,7 @@ function List({ id, children }) {
   if (openId !== id) return null;
 
   return createPortal(
-    <StyledList
-      position={position}
-      ref={ref}
-      role="menu"
-      aria-labelledby={`menu-button-${id}`}
-    >
+    <StyledList position={position} ref={ref} role="menu">
       {children}
     </StyledList>,
     document.body
@@ -150,7 +145,7 @@ function List({ id, children }) {
 /**
  * Menu Button Component
  */
-function Button({ children, icon, onClick, disabled }) {
+function Button({ children, icon, onClick }) {
   const { close } = useContext(MenusContext);
 
   function handleClick() {
@@ -160,7 +155,7 @@ function Button({ children, icon, onClick, disabled }) {
 
   return (
     <li role="menuitem">
-      <StyledButton onClick={handleClick} disabled={disabled} role="button">
+      <StyledButton onClick={handleClick} role="button">
         {icon}
         <span>{children}</span>
       </StyledButton>
