@@ -13,12 +13,12 @@ function UpdateSettingsForm() {
       maxGuestPerBooking,
       breakfastPrice,
     } = {},
-    isLoading,
+    isPending,
   } = useSettings();
 
   const { isUpdating, updateSetting } = useUpdateSetting();
 
-  if (isLoading) return <Spinner />;
+  if (isPending) return <Spinner />;
 
   function handleUpdate(e, field) {
     const { value } = e.target;
