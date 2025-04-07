@@ -2,6 +2,7 @@ import CabinTable from "../features/cabins/CabinTable";
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
 import AddCabin from "../features/cabins/AddCabin";
+import CabinTableOperation from "../features/cabins/CabinTableOperation";
 
 /**
  * Cabins
@@ -21,7 +22,7 @@ function Cabins() {
       {/* The heading and paragraph for filtering and sorting */}
       <Row type="horizontal">
         <Heading as="h1">All cabins</Heading>
-        <p>Filter / Sort</p>
+        <CabinTableOperation />
       </Row>
 
       {/* The table for showing the cabins */}
