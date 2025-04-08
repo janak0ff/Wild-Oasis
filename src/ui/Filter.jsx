@@ -36,11 +36,12 @@ const FilterButton = styled.button`
 `;
 
 function Filter() {
+  // Get the current search params from the URL
   const [searchParams, setSearchParams] = useSearchParams();
 
   function handleClick(value) {
-    searchParams.set("discount", value);
-    setSearchParams(searchParams);
+    searchParams.set("discount", value); // Set the discount filter in the search params
+    setSearchParams(searchParams); // Update the URL with the new search params
   }
 
   return (
