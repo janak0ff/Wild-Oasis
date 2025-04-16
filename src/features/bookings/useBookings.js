@@ -11,7 +11,7 @@ export function useBookings() {
     !filterValue || filterValue === "all"
       ? null
       : { field: "status", value: filterValue };
-  // { field: "totalPrice", value: 6000, method: "gte || lte" };
+  // { field: "totalPrice", value: 6000, method: "gte || lte" }; [todo] for custom filtering
 
   const {
     isPending,
