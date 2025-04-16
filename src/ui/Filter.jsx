@@ -16,7 +16,7 @@ const FilterButton = styled.button`
   border: none;
 
   ${(props) =>
-    props.active &&
+    props.$active && // Changed to transient prop
     css`
       background-color: var(--color-brand-600);
       color: var(--color-brand-50);
@@ -25,7 +25,6 @@ const FilterButton = styled.button`
   border-radius: var(--border-radius-sm);
   font-weight: 500;
   font-size: 1.4rem;
-  /* To give the same height as select */
   padding: 0.44rem 0.8rem;
   transition: all 0.3s;
 
@@ -36,14 +35,12 @@ const FilterButton = styled.button`
 `;
 
 function Filter({ filterField, options }) {
-  // Get the current search params from the URL
   const [searchParams, setSearchParams] = useSearchParams();
-
   const currentFilter = searchParams.get(filterField) || options.at(0).value;
 
   function handleClick(value) {
-    searchParams.set("discount", value); // Set the discount filter in the search params
-    setSearchParams(searchParams); // Update the URL with the new search params
+    searchParams.set(filterField, value); // Fixed to use filterField parameter
+    setSearchParams(searchParams);
   }
 
   return (
@@ -52,7 +49,7 @@ function Filter({ filterField, options }) {
         <FilterButton
           key={option.value}
           onClick={() => handleClick(option.value)}
-          active={currentFilter === option.value}
+          $active={currentFilter === option.value} // Changed to transient prop
           disabled={currentFilter === option.value}
           type="button"
           aria-label={`Filter cabins by ${option.label}`}
